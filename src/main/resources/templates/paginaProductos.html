@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+    <title>Página Productos</title>
+</head>
+<body>
+   <h1 >Página productos</h1>
+   <a th:href="@{/productos/nuevo}"><button class="azul">Crear producto</button></a>
+   <table border="1">
+       <tr>
+           <th>Nombre</th>
+           <th>Precio</th>
+           <th>Editar</th>
+           <th>Borrar</th>
+       </tr>
+       <tr th:each="producto: ${productos}" th:classappend="${producto.precio > 300} ? 'rojo' : ''"   >
+           <td><a th:href="@{/productos/{id}(id=${producto.id})}" th:text="${producto.nombre}"></a></td>
+           <td th:text="${producto.precio}"></td>
+            <td><a th:href="@{/productos/editar/{id}(id=${producto.id})}"><button class="naranja">Editar</button></a></td>
+            <td><a th:href="@{/productos/borrar/{id}(id=${producto.id})}"><button class="rojo">Borrar</button></a></td>
+       </tr>
+
+   </table>
+   <a th:href="@{/datos}">Volver</a>
+</body>
+</html>
