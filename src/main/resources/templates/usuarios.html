@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/head :: head"></div>
+    <title>Lista de Usuarios</title>
+
+</head>
+<body>
+<div th:replace="fragments/cabecera :: header"></div>
+<h1>Usuarios</h1>
+
+<a th:href="@{/usuarios/nuevo}" class="nuevo">Nuevo Usuario</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Rol</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="usuario : ${usuarios}">
+        <td th:text="${usuario.id}"></td>
+        <td th:text="${usuario.username}"></td>
+        <td th:text="${usuario.role}"></td>
+        <td>
+            <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="editar">Editar</a>
+            <a th:href="@{/usuarios/borrar/{id}(id=${usuario.id})}" class="borrar">Borrar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div th:replace="fragments/footer :: pie"></div>
+</body>
+</html>

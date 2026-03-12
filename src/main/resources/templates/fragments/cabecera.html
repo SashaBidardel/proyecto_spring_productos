@@ -1,0 +1,26 @@
+<!-- templates/fragments/header.html -->
+<div th:fragment="header">
+    <header class="site-header">
+        <!-- Barra superior usuario -->
+        <div class="top-bar">
+            <span sec:authorize="isAuthenticated()">
+                Hola, <strong sec:authentication="name">Usuario</strong> |
+                <a th:href="@{/logout}" class="logout-btn">Logout</a>
+            </span>
+            <span sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}" class="login-btn">Login</a>
+            </span>
+        </div>
+
+        <!-- Menú principal -->
+        <nav class="main-nav">
+            <a th:href="@{/}">Inicio</a>
+            <a th:href="@{/productos/lista}">Productos</a>
+            <a th:href="@{/categorias/lista}">Categorías</a>
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/usuarios}">Usuarios</a>
+        </nav>
+    </header>
+</div>
+
+
+

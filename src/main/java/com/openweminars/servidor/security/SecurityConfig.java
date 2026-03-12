@@ -1,38 +1,66 @@
-
 package com.openweminars.servidor.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
+
+    private final CustomUserDetailsService userDetailsService;
+
+    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((authz) -> authz.
-                requestMatchers("/productos/nuevo").authenticated()
-                .anyRequest().permitAll())
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        // SOLO ADMIN
+                        .requestMatchers("/usuarios/**").hasRole("ADMIN")
 
-                .formLogin(form-> form
-                        .loginPage("/login")
-                        .permitAll()
+                        .requestMatchers(
+                                "/productos/nuevo",
+                                "/productos/editar/**",
+                                "/productos/borrar/**"
+                        ).hasRole("ADMIN")
+
+                        .requestMatchers(
+                                "/categorias/nuevo",
+                                "/categorias/editar/**",
+                                "/categorias/borrar/**"
+                        ).hasRole("ADMIN")
+
+                        // TODOS LOS USUARIOS LOGUEADOS
+                        .requestMatchers(
+                                "/productos/**",
+                                "/categorias/**"
+                        ).authenticated()
+
+                        // acceso libre
+                        .requestMatchers(
+                                "/login",
+                                "/registro",
+                                "/css/**"
+                        ).permitAll()
+
+                        .anyRequest().authenticated()
+                )
+
+                .formLogin(form -> form
+                .loginPage("/login")   // aquí ponemos nuestra página
+                .permitAll()   // habilita formulario web
+                )
+                .httpBasic(Customizer.withDefaults() // opcional: basic auth
+                //.exceptionHandling(ex -> ex
+                  //      .accessDeniedPage("/403")  // página de acceso denegado
                 );
+        return http.build();
     }
 
-    @Bean
-    public InMemoryUserDetailsManager userDetailsService(){
-        UserDetails user= User.builder()
-                .username("admin")
-                .password("{noop}admin")
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user);
-    }
+
 }

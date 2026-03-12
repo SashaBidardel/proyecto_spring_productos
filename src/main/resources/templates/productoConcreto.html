@@ -1,25 +1,28 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<div th:replace="fragments/head :: head"></div>
     <title>Producto Concreto</title>
 </head>
 <body>
+<div th:replace="fragments/cabecera :: header"></div>
      <h1>Producto concreto</h1>
      <table border="1">
          <tr>
              <th>ID</th>
              <th>Nombre</th>
              <th>Precio</th>
+             <th>Categoría</th>
          </tr>
          <tr>
              <th th:text="'ID del producto:' + ${producto.id}"></th>
              <th th:text=" ${producto.nombre}"></th>
              <th th:text=" ${producto.precio}"> ></th>
+             <th th:text=" ${categoria}"> ></th>
+
          </tr>
 
 
      </table>
+<div th:replace="fragments/footer :: pie"></div>
 </body>
 </html>

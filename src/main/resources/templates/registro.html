@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de usuario</title>
+    <link rel="stylesheet" th:href="@{/css/estilos-form.css}">
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+
+
+<div class="form-container">
+    <h2>Registro de usuario</h2>
+
+    <!-- Mensaje de error -->
+    <div th:if="${error}" class="error-msg" th:text="${error}"></div>
+
+    <form th:action="@{/registro}" th:object="${usuario}" method="post" class="registro-form" id="formRegistro">
+        <label>Username</label>
+        <input type="text" autocomplete="off" th:field="*{username}" required placeholder="Usuario">
+
+        <label>Password</label>
+        <input type="password" autocomplete="new-password" th:field="*{password}" required placeholder="Contraseña">
+
+        <button type="submit">Registrarse</button>
+    </form>
+
+    <p>¿Ya tienes cuenta? <a th:href="@{/login}">Inicia sesión</a></p>
+</div>
+
+<!-- Footer -->
+<div th:replace="fragments/footer :: pie"></div>
+
+</body>
+</html>

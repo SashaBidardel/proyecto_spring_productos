@@ -1,6 +1,5 @@
-package com.openweminars.servidor.categoria;
+package com.openweminars.servidor.model;
 
-import com.openweminars.servidor.producto.Producto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,15 +8,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-
-import com.openweminars.servidor.producto.Producto;
-import jakarta.persistence.*;
-        import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.util.List;
 
 
 @Entity
@@ -30,11 +20,10 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String nombre;
+    @Column(unique = true)
+    private String nombre ;
 
 
     @OneToMany(mappedBy = "categoria")
     private List<Producto> productos;
 }
-

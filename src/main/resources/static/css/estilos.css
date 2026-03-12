@@ -1,9 +1,92 @@
-.rojo{
-    background-color: red;
+html, body{
+    height:100%;
 }
-.naranja{
-  background-color: orange;
-  }
- .azul{
-  background-color: blue;
+body{
+    display:flex;
+    flex-direction:column;
+}
+ /* Header completo */
+ .site-header {
+     background-color: #f8f9fa;
+     padding: 10px 20px;
+     border-bottom: 1px solid #ddd;
+     font-family: Arial, sans-serif;
  }
+
+ /* Barra superior usuario */
+ .top-bar {
+     text-align: right;
+     font-size: 0.9em;
+     margin-bottom: 8px;
+ }
+
+ .top-bar a {
+     text-decoration: none;
+     color: #007bff;
+ }
+
+ .top-bar a:hover {
+     text-decoration: underline;
+ }
+
+ /* Menú principal */
+ .main-nav {
+     display: flex;
+     gap: 15px;
+     font-weight: bold;
+ }
+
+ .main-nav a {
+     text-decoration: none;
+     color: #333;
+     padding: 5px 8px;
+     border-radius: 4px;
+ }
+
+ .main-nav a:hover {
+     background-color: #007bff;
+     color: #fff;
+ }
+   table { border-collapse: collapse; width: 60%; }
+         th, td { border: 1px solid #333; padding: 8px; text-align: left; }
+         th { background-color: #eee }
+
+   .editar {
+   background-color: orange; color: white; padding: 4px 8px; text-decoration: none
+   }
+
+   .borrar {
+    background-color: red; color: white; padding: 4px 8px; text-decoration: none
+    }
+   .nuevo{
+     background-color: green; color: white; padding: 6px 12px; text-decoration: none; display: inline-block; margin-bottom: 10px
+     }
+   footer{
+       margin-top:auto;
+       padding:15px 0;
+       text-align:center;
+       background-color:#1f2937;
+       color:white;
+       font-size:14px;
+       border-top:3px solid #3b82f6;
+   }
+
+   footer span{
+       opacity:0.9;
+   }
+   #inicio-container {
+       display: flex;
+       flex-direction: column; /* Coloca los elementos en columna */
+       justify-content: center; /* Centra verticalmente */
+       align-items: center;     /* Centra horizontalmente */
+       min-height: 80vh;        /* Ocupa la mayoría de la altura de la ventana */
+       gap: 20px;               /* Espacio entre los elementos */
+   }
+
+   img {
+                  width: 300px;       /* Mayor tamaño */
+                  height: auto;       /* Mantiene proporciones */
+                  margin-bottom: 30px;
+                  object-fit: contain; /* Se muestra completa sin recortar */
+                  border-radius: 12px; /* Opcional, bordes suaves */
+       }

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <div th:replace="fragments/head-error :: head-error"></div>
-<title>No existe la página</title>
+    <title>Acceso denegado</title>
 
 </head>
 <div class="error-container">
     <img th:src="@{/imagenes/recicla.jpeg}" alt="Error">
-    <h1> Error 404 ¡No existe la página, Bucanero!!!!</h1>
+    <h1> Error 403 ¡No tienes permisos, Pirata!!!!</h1>
     <a class="button" href="/">Volver al inicio</a>
 </div>
 </html>

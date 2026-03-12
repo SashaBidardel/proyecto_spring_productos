@@ -1,14 +1,18 @@
-package com.openweminars.servidor.producto;
-
-import com.openweminars.servidor.categoria.Categoria;
-import com.openweminars.servidor.categoria.CategoriaService;
+package com.openweminars.servidor.controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.openweminars.servidor.model.Categoria;
+import com.openweminars.servidor.service.CategoriaService;
+import com.openweminars.servidor.model.Producto;
+import com.openweminars.servidor.repository.ProductoRepository;
+import com.openweminars.servidor.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/productos")
@@ -17,38 +21,37 @@ public class ProductoController {
     private final ProductoService productoService;
     @Autowired
     private final CategoriaService categoriaService;
-    private final ProductoRepository productoRepository;
+
 
     public ProductoController(ProductoService productoService, CategoriaService categoriaService,
                               ProductoRepository productoRepository) {
         this.productoService = productoService;
         this.categoriaService = categoriaService;
-        this.productoRepository = productoRepository;
-    }
 
+    }
+    private static final Logger log = LoggerFactory.getLogger(ProductoController.class);
     @GetMapping("/lista")
     public String listaProductos (Model model){
         model.addAttribute("productos",productoService.obtenerProductos());
+        log.info("Listando los productos ");
         return "paginaProductos";
     }
     @GetMapping("/{id:[0-9]+}")
     public String productoConcreto (@PathVariable("id") String id,Model model){
         Long idLong = Long.parseLong(id);
         Producto producto = productoService.productoConcreto(idLong);
+        String categoria = producto.getCategoria().getNombre();
+        //Categoria categoria =categoriaService.obtenerCategoria()
         if (producto == null) {
             model.addAttribute("mensaje","El producto con ID:" + id + " no existe");
-            return "error/404";
+            return "404";
         }
+        log.info("Buscando el producto con el id: "+ idLong);
         model.addAttribute("producto",producto);
-
+        model.addAttribute("categoria", categoria);
         return "productoConcreto";
     }
-    @GetMapping("/param")
-    public String param(@RequestParam(name="nombre",required = false,defaultValue = "user") String nombre,@RequestParam(name="edad",required = false,defaultValue = "0") int edad,Model model){
-        model.addAttribute("nombre",nombre);
-        model.addAttribute("edad",edad);
-        return "param";
-    }
+
     @ModelAttribute("categorias")
     public List<Categoria> categorias(){
         return categoriaService.listaCategorias();
@@ -76,6 +79,7 @@ public class ProductoController {
             System.out.println("No se encontró la categoría con id: " + producto.getCategoria().getId());
             model.addAttribute("mensaje", "La categoría seleccionada no existe");
             model.addAttribute("producto", producto);
+            log.info("Creado el producto: " + producto.getNombre());
             return "form-producto";
         }
 
@@ -91,11 +95,14 @@ public class ProductoController {
     public String editarProducto(@PathVariable Long id,Model model ){
         Producto producto= productoService.productoConcreto(id);
         model.addAttribute("producto",producto);
+        log.info("Editando el producto  ", producto.getNombre());
         return "form-producto";
     }
     @GetMapping("/borrar/{id}")
     public String borrarProducto(@PathVariable Long id, Model model){
         productoService.borrarProducto(id);
+        log.warn("Intentando borrar el producto con id "+ id);
         return "redirect:/productos/lista";
     }
 }
+

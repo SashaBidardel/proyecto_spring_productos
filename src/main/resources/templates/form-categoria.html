@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/head :: head"></div>
+<link rel="stylesheet" th:href="@{/css/estilos-form.css}">
+    <title>formulario categoria</title>
+</head>
+<body>
+<div th:replace="fragments/cabecera :: header"></div>
+    <h1 th:text="${categoria.id} ? 'Edición Producto' : 'Creación Categoria'"></h1>
+    <form action="#" th:action="@{/categorias/nuevo}" method="post" th:object="${categoria}">
+        <input type="hidden" th:field="*{id}" id="id">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" type="text" th:field="*{nombre}" placeholder="Nombre de la categoría">
+        <input type="submit" value="Enviar">
+    </form>
+<div th:replace="fragments/footer :: pie"></div>
+</body>
+</html>

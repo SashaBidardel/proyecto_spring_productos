@@ -1,9 +1,12 @@
-package com.openweminars.servidor.producto;
+package com.openweminars.servidor.repository;
 
+import com.openweminars.servidor.model.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto,Long> {
-
+    Optional<Producto> findByNombre(String nombre);
 }

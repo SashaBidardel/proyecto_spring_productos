@@ -1,11 +1,14 @@
 <!doctype html>
-<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inicio</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/head :: head"></div>
+<title>Categorias</title>
 </head>
 <body>
-    <h1>"Hello,World"</h1>
+<div th:replace="fragments/cabecera :: header"></div>
+<div id="inicio-container">
+    <h1>INICIO</h1>
+    <img th:src="@{/imagenes/recicla.jpeg}" alt="inicio" >
+</div>
+<div th:replace="fragments/footer :: pie"></div>
 </body>
 </html>

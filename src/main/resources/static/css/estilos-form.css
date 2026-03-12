@@ -1,0 +1,115 @@
+/* --- Contenedor de formularios --- */
+form {
+    max-width: 400px;      /* ancho del formulario */
+    margin: 50px auto;     /* centrado vertical y horizontal */
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* --- Títulos --- */
+form h1, form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* --- Labels --- */
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* --- Inputs --- */
+form input[type="text"],
+form input[type="password"],
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* --- Inputs al enfocar --- */
+form input:focus,
+form select:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+
+/* --- Botón de submit --- */
+form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* --- Hover del botón --- */
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* --- Mensajes de error / éxito --- */
+form div[th\\:if] {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Error */
+form div[th\\:if][style*="red"] {
+    color: #c00;
+}
+
+/* Éxito */
+form div[th\\:if][style*="green"] {
+    color: #090;
+}
+
+/* --- Enlaces (registro/login) --- */
+form a.register-btn,
+form a.login-btn {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+form a.register-btn:hover,
+form a.login-btn:hover {
+    text-decoration: underline;
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* centra verticalmente */
+    align-items: center;      /* centra horizontalmente */
+    min-height: 100vh;        /* ocupa toda la pantalla */
+    background-color: #f0f2f5;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+/* --- Título --- */
+.form-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}

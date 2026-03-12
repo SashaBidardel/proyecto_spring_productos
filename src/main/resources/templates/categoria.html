@@ -1,13 +1,28 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Categoría</title>
+<div th:replace="fragments/head :: head"></div>
+<title>Categoría</title>
 </head>
 <body>
-   <h1>CATEGORÍA CONCRETA</h1>
-   <p th:text="${categoria.id}"></p>
-   <p th:text="${categoria.nombre}"></p>
+<div th:replace="fragments/cabecera :: header"></div>
+
+<h1>CATEGORÍA CONCRETA</h1>
+
+<table border="1" style="width: 50%; margin: 20px auto; text-align: center;">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${categoria.id}"></td>
+        <td th:text="${categoria.nombre}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div th:replace="fragments/footer :: pie"></div>
 </body>
 </html>

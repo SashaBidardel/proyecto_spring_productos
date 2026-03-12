@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: openwebinars-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: sasha
+      MYSQL_DATABASE: openwebinars-docker
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data-docker:/var/lib/mysql
+    networks:
+      - openwebinars-net
+
+  servidor:
+    build: .
+    container_name: openwebinars-servidor
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/openwebinars?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: sasha
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8080:8080"
+    networks:
+      - openwebinars-net
+
+volumes:
+  mysql-data-docker:
+
+networks:
+  openwebinars-net:

@@ -1,6 +1,5 @@
-package com.openweminars.servidor.producto;
+package com.openweminars.servidor.model;
 
-import com.openweminars.servidor.categoria.Categoria;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
