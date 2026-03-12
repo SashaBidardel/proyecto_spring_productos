@@ -164,6 +164,41 @@ Define las entidades del sistema:
 - Categoría
 - Usuario
 
+### 📂 Carpeta `security`
+
+- Ubicada en `src/main/java/com/openweminars/servidor/security`.
+- Contiene clases relacionadas con la **seguridad y autenticación** de la aplicación.
+- **Clases principales:**
+    - `SecurityConfig.java`: Configura Spring Security.
+        - Define las rutas accesibles por **ADMIN** y **USER**.
+        - Configura el login, roles y páginas de error (403, 404).
+    - `CustomUserDetailsService.java`: Gestiona la carga de usuarios desde la base de datos.
+        - Spring Security llama a este servicio para autenticar usuarios.
+
+**Propósito:** Separar toda la lógica de seguridad del resto de la aplicación y centralizar la gestión de roles y permisos.
+
+---
+
+### 📂 Carpeta `exceptions`
+
+- Ubicada en `src/main/java/com/openweminars/servidor/exceptions`.
+- Contiene **excepciones personalizadas** para manejar errores de negocio.
+- **Clases principales:**
+    - `CategoriaException.java`: Se lanza al intentar borrar o editar la categoría “General” o al crear categorías duplicadas.
+    - `ProductoException.java`: Se lanza al buscar o guardar productos que no existen o que tienen conflictos de nombre.
+    - `UsuarioException.java`: Se lanza al intentar crear usuarios con nombres duplicados.
+
+**Propósito:** Centralizar la gestión de errores y poder mostrarlos de manera clara en la interfaz, evitando mensajes genéricos y controlando el flujo de negocio.
+
+---
+
+### 🔗 Relación con el resto del proyecto
+
+- Los **controladores** (`controller`) capturan las excepciones lanzadas por los **servicios** (`service`) y redirigen a páginas de error personalizadas.
+- La carpeta `security` garantiza que los usuarios **solo puedan acceder a lo permitido según su rol**, mientras que `exceptions` asegura que **el negocio no pueda realizar operaciones inválidas**.
+- Juntas, permiten un proyecto robusto, seguro y fácil de mantener.
+
+---
 ---
 
 # ▶️ Cómo ejecutar el proyecto
