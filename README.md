@@ -93,6 +93,7 @@ No puede:
 - Crear productos
 - Editar productos
 - Borrar productos
+- Ver,editar o borrar lista de usuarios
 
 Esto se controla mediante **Spring Security y autorización por roles**.
 
