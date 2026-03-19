@@ -52,12 +52,10 @@ public class SecurityConfig {
                 )
 
                 .formLogin(form -> form
-                .loginPage("/login")   // aquí ponemos nuestra página
+                .loginPage("/login")   // aquí ponemos nuestra página personalizada
                 .permitAll()   // habilita formulario web
                 )
-                .httpBasic(Customizer.withDefaults() // opcional: basic auth
-                //.exceptionHandling(ex -> ex
-                  //      .accessDeniedPage("/403")  // página de acceso denegado
+                .httpBasic(Customizer.withDefaults()
                 );
         return http.build();
     }
